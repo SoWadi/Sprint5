@@ -1,0 +1,124 @@
+body {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+    color: aliceblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+
+
+    /* background-image: url("./img/blob.svg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-size:contain;
+     */
+}
+ section {
+    margin: auto;
+ }
+
+.containerJokesRow {
+    position: relative;
+    padding-top: 250px;
+    margin-top: 2px;
+    background-image: url("./img/blob.svg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover; 
+}
+
+
+p {
+    min-height: 40px;
+    width: 400px;
+}
+
+.originalBlob {
+    height: 110vh;
+    margin-right: -170px;
+    
+}
+
+#icon {
+    width: 100%;
+    border-right: 2px solid rgb(32, 32, 32);
+    height: 50px;
+    padding-right: 50px;
+    padding-left: 50px ;
+}
+
+i {
+    
+    color: black;
+    height: 20px;
+}
+
+i:hover {
+   
+    transform: scale(1.2);
+}
+
+.vullAcuditBtn{
+    background-color: rgb(255, 217, 0);
+    font-size: 15px;
+    padding: 10px; 
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 3px solid black;
+    box-shadow: 5px 5px 1px rgba(252, 214, 1, 0.812);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 1000;
+}
+
+.scoreBtn {
+    color: yellow;
+}
+
+button:hover {
+    background-color: rgb(255, 183, 0);
+}
+
+.fa-regular, .far{
+    color: rgb(5, 5, 5);
+    background-color: rgb(244, 214, 19);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    font-size: 45px;
+}
+
+
+.blob2 {
+    position: absolute;
+    width: 20%;
+    bottom: 5%;
+    left: 3%;
+    z-index: -1;
+}
+.blob3 {
+    position: absolute; 
+    width: 20%;
+    top: 7%;
+    right: 7%;    
+}
+
+@media only screen and (max-width: 900px) {
+    .blob2, .blob3 {
+      display: none;
+    }
+
+    .containerJokesRow {
+        font-size: 15px;
+        padding: 257px;
+    }
+    .vullAcuditBtn {
+        width: 130px;
+        box-shadow: 5px 5px 1px rgba(67, 57, 2, 0.812);
+    } 
+  }

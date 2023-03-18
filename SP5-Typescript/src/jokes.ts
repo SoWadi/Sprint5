@@ -1,4 +1,4 @@
-let jokeOutput: HTMLElement | null = document.querySelector("#jokeOutput"); // Botón para obtener el siguiente chiste = document.getElementById("jokeOutput");
+let jokeOutput: HTMLElement | null = document.querySelector("#jokeOutput");
 let counter = 0;
 let btnContainer = document.querySelector(".scoreButtons");
 let dataAPI, data;
@@ -90,7 +90,6 @@ function getTheDate() {
         //document.getElementById("containerJokesId").style = "background-image: url('img/blob2.svg');"
     
         currentImageIndex = Math.floor(Math.random() * imagesBG.length);
-        //showBlob.src = imagesBG[currentImageIndex]; // Cambio de la imagen
         console.log("currentImageIndex: ", currentImageIndex);
         console.log(imagesBG[currentImageIndex]);
     

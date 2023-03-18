@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let jokeOutput = document.querySelector("#jokeOutput"); // Botón para obtener el siguiente chiste = document.getElementById("jokeOutput");
+let jokeOutput = document.querySelector("#jokeOutput");
 let counter = 0;
 let btnContainer = document.querySelector(".scoreButtons");
 let dataAPI, data;
@@ -90,7 +90,6 @@ function showJoke() {
         class="fa-regular fa-face-grin-squint-tears"></i></button>`;
         //document.getElementById("containerJokesId").style = "background-image: url('img/blob2.svg');"
         currentImageIndex = Math.floor(Math.random() * imagesBG.length);
-        //showBlob.src = imagesBG[currentImageIndex]; // Cambio de la imagen
         console.log("currentImageIndex: ", currentImageIndex);
         console.log(imagesBG[currentImageIndex]);
         //showBgBlob.src = imagesBG[currentImageIndex];
@@ -106,6 +105,7 @@ const reportJoke = [];
 function getTheScore(score) {
     let dateJoke = getTheDate();
     dateJoke;
+    console.log("score: ", score);
     lastOne = reportJoke.length - 1;
     let jokeIsThereIndex = reportJoke.findIndex((reportJokeItem) => reportJokeItem.jokeJoke === joke);
     console.log("jokeIsThereIndex: ", jokeIsThereIndex);

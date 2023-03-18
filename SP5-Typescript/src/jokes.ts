@@ -1,4 +1,4 @@
-let jokeOutput = document.getElementById("jokeOutput");
+let jokeOutput: HTMLElement | null = document.querySelector("#jokeOutput"); // Botón para obtener el siguiente chiste = document.getElementById("jokeOutput");
 let counter = 0;
 let btnContainer = document.querySelector(".scoreButtons");
 let dataAPI, data;
@@ -6,16 +6,20 @@ let scoreJoke, joke;
 scoreJoke = undefined
 let dadJokesApi = "https://icanhazdadjoke.com"
 let chuckNorrisJokes = "https://api.chucknorris.io/jokes/random ";
-let randomN, lastOne;    
-let showBlob = document.getElementById("bgBlob"); 
+let randomN:number;
+let lastOne;    
+let showBgBlob : HTMLElement | null = document.querySelector("#bgBlob"); 
 //const weatherIcon = document.getElementById("icon");
-let iconCode, iconUrl;
+let weatherIcon: HTMLElement | null  = document.querySelector("#icon") //.innerHTML =  iconCode
+
+let iconCode :string;
+let iconUrl:string;
+let jokeJoke:string;
 
 async function cargarApi() {
-randomN = Math.random();
-console.log(randomN);
-
-if (randomN < 0.5){
+    randomN = Math.random();
+    console.log(randomN);
+    if (randomN < 0.5){
 
         await fetch("https://icanhazdadjoke.com/", {
           headers: {
@@ -24,7 +28,7 @@ if (randomN < 0.5){
         })
           .then((response) => response.json())
           .then((data) => {
-            jokeOutput.innerHTML = data.joke;
+            jokeOutput.textContent = data.joke;
             console.log(data);
           });
     }
@@ -60,18 +64,6 @@ reportJoke.push(objJoke);
 console.log("reportJoke: ", reportJoke);
 }
 
-/* async function chuckNorris() {
-    
-    await fetch(chuckNorrisJokes)
-      .then((response) => response.json())
-      .then((data) => {
-        jokeOutput.innerHTML = data.value;
-        console.log(data);
-      });
-    } */
-
-
-
 function getTheDate() {
     const d = new Date();
     let date = d.toISOString().substring(0, 19);
@@ -79,75 +71,60 @@ function getTheDate() {
     return date;
     }
 
-
-async function showJoke() {
-    let imagesBG = ["img/blob2.svg", "img/blob4.svg", "img/blob5.svg"];
-    let currentImageIndex = 0;
-
-    counter++;
-    console.log("counter: ", counter);
-    //jokeOutput.textContent = dataAPI.joke;
-
-    btnContainer.innerHTML = `<p>Pots votar:</p>
-    <button class="scoreBtn btn" onclick="getTheScore(1)"><i
-    class="fa-regular fa-face-laugh-beam"></i></button>
-    <button class="scoreBtn btn" onclick="getTheScore(2)"><i
-    class="fa-regular fa-face-laugh-squint"></i></button>
-    <button class="scoreBtn btn" onclick="getTheScore(3)"><i
-    class="fa-regular fa-face-grin-squint-tears"></i></button>`;
-
-    //document.getElementById("containerJokesId").style = "background-image: url('img/blob2.svg');"
-
-    currentImageIndex = Math.floor(Math.random() * imagesBG.length);
-    //showBlob.src = imagesBG[currentImageIndex]; // Cambio de la imagen
-    console.log("currentImageIndex: ", currentImageIndex);
-    console.log(imagesBG[currentImageIndex]);
-
-    showBlob.src = imagesBG[currentImageIndex];
-
-
-    jokeJoke = jokeOutput.textContent;
-//console.log("joke: ", joke, dataAPI.id);
-
-}
-
-let btn = document.getElementById("callApi");
-btn.addEventListener("click", cargarApi);
-
-
-
+    async function showJoke() {
+        let imagesBG:string[] = ["img/blob2.svg", "img/blob4.svg", "img/blob5.svg"];
+        let currentImageIndex:number = 0;
+    
+        counter++;
+        console.log("counter: ", counter);
+        //jokeOutput.textContent = dataAPI.joke;
+    
+        btnContainer.innerHTML = `<p>Pots votar:</p>
+        <button class="scoreBtn btn" onclick="getTheScore(1)"><i
+        class="fa-regular fa-face-laugh-beam"></i></button>
+        <button class="scoreBtn btn" onclick="getTheScore(2)"><i
+        class="fa-regular fa-face-laugh-squint"></i></button>
+        <button class="scoreBtn btn" onclick="getTheScore(3)"><i
+        class="fa-regular fa-face-grin-squint-tears"></i></button>`;
+    
+        //document.getElementById("containerJokesId").style = "background-image: url('img/blob2.svg');"
+    
+        currentImageIndex = Math.floor(Math.random() * imagesBG.length);
+        //showBlob.src = imagesBG[currentImageIndex]; // Cambio de la imagen
+        console.log("currentImageIndex: ", currentImageIndex);
+        console.log(imagesBG[currentImageIndex]);
+    
+        //showBgBlob.src = imagesBG[currentImageIndex];
+        showBgBlob.setAttribute("src",imagesBG[currentImageIndex])
+    
+        jokeJoke = jokeOutput.textContent;
+    //console.log("joke: ", joke, dataAPI.id);
+    
+    }
+    
+    let btn = document.getElementById("callApi");
+    btn.addEventListener("click", cargarApi);
 
 
 // ********************************************************* MAKE THE OBJECT *********************************************************
 const reportJoke = [];
 
-function getTheScore(score) {
+function getTheScore(score:number) {
 let dateJoke = getTheDate();
 dateJoke;
-
-let length_ = reportJoke.length;
+console.log("score: ", score);
+lastOne = reportJoke.length -1;
 
 let jokeIsThereIndex = reportJoke.findIndex((reportJokeItem) => reportJokeItem.jokeJoke ===  joke );
 console.log("jokeIsThereIndex: ", jokeIsThereIndex);
 
-console.log("reportJoke[reportJoke['length']-1]:", reportJoke[reportJoke["length"]-1]);
-console.log("reportJoke[reportJoke['length']]:", reportJoke[length_]);
+/* console.log("length_: ", length_); */
+reportJoke[lastOne].scoreJoke = score;
 
 
-if (scoreJoke !== undefined) {
-  reportJoke["length"].scoreJoke = score;
-} else {
-    reportJoke[jokeIsThereIndex].scoreJoke = score;
-}
 console.log(reportJoke);
 
 }
-
-
-
-
-
-
 
 
 
@@ -171,8 +148,9 @@ fetch(url)
         //document.querySelector("#city").innerHTML = data.name;
         document.querySelector("#temp").innerHTML = data.main.temp + "º";
         iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
-        weatherIcon = document.querySelector("#icon") //.innerHTML =  iconCode
-        weatherIcon.src = iconUrl;
+        //weatherIcon.src = iconUrl;
+        weatherIcon.setAttribute("src",iconUrl);
+
     })
     )
     .catch((err) => console.log("Erreur: " + err));
